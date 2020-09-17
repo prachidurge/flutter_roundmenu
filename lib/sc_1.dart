@@ -3,8 +3,8 @@ import 'package:flutter_roundmenu/home_screen.dart';
 
 class PlaceholderWidget extends StatelessWidget {
   final Color color;
-
-  PlaceholderWidget(this.color);
+  final ValueChanged onIndexChanged;
+  PlaceholderWidget(this.color, {this.onIndexChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,16 @@ class PlaceholderWidget extends StatelessWidget {
           Text('Screen 1!'),
           const SizedBox(height: 30),
           RaisedButton(
-            onPressed: () {_fun(1);},
+            onPressed: () {
+              onIndexChanged(1);
+              },
             child: const Text('Goto Screen 2', style: TextStyle(fontSize: 20)),
           ),
           const SizedBox(height: 30),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              onIndexChanged(2);
+            },
             child: const Text('Goto Screen 3', style: TextStyle(fontSize: 20)),
           ),
 

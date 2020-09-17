@@ -6,7 +6,6 @@ import 'package:flutter_roundmenu/sc_3.dart';
 
 class HomeScreen extends StatefulWidget {
   static var tag = "HomeScreen";
-  int currentTab = 0;
   GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
  // HomeScreen({this.currentTab});
 
@@ -18,11 +17,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   //int _currentIndex = 0;
-  final List<Widget> _children = [
-    PlaceholderWidget(Colors.white),
-    PlaceholderWidgetScreen2(Colors.deepOrange),
-    PlaceholderWidgetScreen3(Colors.green)
-  ];
+  int currentTab = 0;
+  Widget _buildWidget(int currentTab) {
+    switch(currentTab) {
+      case 0:
+        return PlaceholderWidget(Colors.white, onIndexChanged: (value) => onTabTapped(value));
+        break;
+      case 1:
+        return PlaceholderWidgetScreen2(Colors.deepOrange, onIndexChanged: (value) => onTabTapped(value));
+        break;
+      default:
+        return PlaceholderWidgetScreen3(Colors.green, onIndexChanged: (value) => onTabTapped(value));
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +38,11 @@ class _HomeScreen extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Flutter Bottem Navi '),
       ),
-      body: _children[widget.currentTab],
+      body: _buildWidget(currentTab),
       bottomNavigationBar: new BottomNavigationBar(
         key: widget.globalKey,
         onTap: onTabTapped,
-        currentIndex: widget.currentTab,
+        currentIndex: currentTab,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -53,7 +61,7 @@ class _HomeScreen extends State<HomeScreen> {
 
   void onTabTapped(int index) {
     setState(() {
-      widget.currentTab = index;
+      currentTab = index;
     });
   }
 }
