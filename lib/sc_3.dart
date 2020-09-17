@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class PlaceholderWidgetScreen3 extends StatelessWidget {
   final Color color;
-
-  PlaceholderWidgetScreen3(this.color);
+  final ValueChanged<int> onIndexChanged;
+  PlaceholderWidgetScreen3(this.color, {this.onIndexChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,16 @@ class PlaceholderWidgetScreen3 extends StatelessWidget {
           Text('Screen 3!'),
           const SizedBox(height: 30),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              onIndexChanged(0);
+            },
             child: const Text('Goto Screen 1', style: TextStyle(fontSize: 20)),
           ),
           const SizedBox(height: 30),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              onIndexChanged(1);
+            },
             child: const Text('Goto Screen 2', style: TextStyle(fontSize: 20)),
           ),
 
